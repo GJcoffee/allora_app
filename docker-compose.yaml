@@ -18,7 +18,7 @@ services:
     ports:
       - "5500:5500"
     depends_on:
-      - db
+      - mysql
 
   mysql:
     image: mysql:8.0
