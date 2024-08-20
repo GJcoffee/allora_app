@@ -52,6 +52,7 @@ def upload_host_info():
 if __name__ == '__main__':
     while True:
         try:
+            time.sleep(10)
             app.run(debug=False, host='0.0.0.0', port=5500)
             break
         except Exception as e:
