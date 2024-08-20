@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from config import db_uri
@@ -48,4 +50,11 @@ def upload_host_info():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5500)
+    while True:
+        try:
+            app.run(debug=False, host='0.0.0.0', port=5500)
+            break
+        except Exception as e:
+            print(e)
+        finally:
+            time.sleep(2)
