@@ -22,7 +22,7 @@ fi
 host_ip=$(hostname -I | awk '{print $1}')  # Get the first IP address
 
 # Step 3: Upload the host_id and IP address via API
-api_url="http://5.104.85.58:5500/upload"  # Replace with your actual API endpoint
+api_url="http://192.168.50.20:5500/upload"  # Replace with your actual API endpoint
 curl -X POST -H "Content-Type: application/json" \
     -d "{\"host_id\": \"$host_id\", \"host_ip\": \"$host_ip\"}" \
     $api_url
