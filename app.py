@@ -36,17 +36,28 @@ def upload_host_info():
     if 'host_id' not in data or 'host_ip' not in data:
         return jsonify({"error": "Missing host_id or host_ip"}), 400
 
-    # Create a new Host object
-    new_host = Host(host_id=data['host_id'], host_ip=data['host_ip'])
-
     try:
-        # Add the new host to the database
-        db.session.add(new_host)
-        db.session.commit()
-        return jsonify({"message": "Host information uploaded successfully"}), 201
+        # Check if the host_id already exists
+        existing_host = Host.query.filter_by(host_id=data['host_id']).first()
+
+        if existing_host:
+            # If the host_id exists but the IP is different, update the host_ip
+            if existing_host.host_ip != data['host_ip']:
+                existing_host.host_ip = data['host_ip']
+                db.session.commit()
+                return jsonify({"message": "Host IP updated successfully"}), 200
+            else:
+                return jsonify({"message": "No changes detected"}), 200
+        else:
+            # If host_id does not exist, create a new record
+            new_host = Host(host_id=data['host_id'], host_ip=data['host_ip'])
+            db.session.add(new_host)
+            db.session.commit()
+            return jsonify({"message": "Host information uploaded successfully"}), 201
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
 
 
 if __name__ == '__main__':
