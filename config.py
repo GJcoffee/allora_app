@@ -1,5 +1,5 @@
 mysql_config = {
-    'host': 'mysql_db',
+    'host': '5.104.85.58',
     'user': 'root',
     'port': 3306,
     'password': '123456',
