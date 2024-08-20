@@ -28,4 +28,4 @@ ENV FLASK_APP=app.py
 EXPOSE 5500
 
 # Run the Flask app
-CMD ["python3", "app.py"]
+#CMD ["python3", "app.py"]
